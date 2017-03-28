@@ -1,3 +1,5 @@
 SfnRegistry.register(:keypair_name) do
-  ['sparkleformation']
+  default 'sparkleformation'
+  description 'SSH Keypair name'
+  type 'String'
 end

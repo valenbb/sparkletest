@@ -1,21 +1,13 @@
-SparkleFormation.dynamic(:node) do |name, opts={}|
+SparkleFormation.dynamic(:node) do |name, _config={}|
 
   parameters do
-    set!("#{name}_image_id".to_sym) do
-      type 'String'
-      default 'ami-0b33d91d'
-      allowed_values registry!(:image_id)
-    end
-    set!("#{name}_ssh_key_name".to_sym) do
-      type 'String'
-      default 'sparkleformation'
-      allowed_values registry!(:keypair_name)
-    end
-    set!("#{name}_flavor".to_sym) do
-      type 'String'
-      default 't2.small'
-      allowed_values registry!(:instance_flavor)
-    end
+  
+    registry!(:image_id, _name, _config)
+	
+	registry!(:keypair_name, _name, _config)
+	
+	registry!(:instance_flavor, _name, _config)
+	
   end
 
   outputs.set!("#{name}_public_address".to_sym) do
@@ -26,8 +18,8 @@ SparkleFormation.dynamic(:node) do |name, opts={}|
   dynamic!(:ec2_instance, name) do
     properties do
       image_id ref!("#{name}_image_id".to_sym)
-      instance_type ref!("#{name}_flavor".to_sym)
-      key_name ref!("#{name}_ssh_key_name".to_sym)
+      instance_type ref!("#{name}_instance_flavor".to_sym)
+      key_name ref!("#{name}_keypair_name".to_sym)
     end
   end
 
