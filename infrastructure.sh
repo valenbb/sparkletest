@@ -13,7 +13,7 @@ source $HOME/awscreds
 # Source the RVM config script
 echo Sourcing the RVM configuration
 source $HOME/.bashrc
-source $HOME/.profle
+source $HOME/.profile
 
 # Use ruby 2.4.0
 echo Changing to Ruby-2.4.0
