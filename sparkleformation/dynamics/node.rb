@@ -1,8 +1,16 @@
 SparkleFormation.dynamic(:node) do |name, opts={}|
 
   parameters do
-    set!("#{name}_image_id".to_sym).type 'String'
-    set!("#{name}_ssh_key_name".to_sym).type 'String'
+    set!("#{name}_image_id".to_sym) do
+      type 'String'
+      default 'ami-0b33d91d'
+      allowed_values registry!(:image_id)
+    end
+    set!("#{name}_ssh_key_name".to_sym) do
+      type 'String'
+      default 'sparkleformation'
+      allowed_values registry!(:keypair_name)
+    end
     set!("#{name}_flavor".to_sym) do
       type 'String'
       default 't2.small'
